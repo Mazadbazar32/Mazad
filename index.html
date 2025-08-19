@@ -1,66 +1,93 @@
 <!DOCTYPE html>
 <html lang="ckb" dir="rtl">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Mazad Bazar – مزاد بازار</title>
-<style>
-:root{
-  --bg:#0b1020;--card:#0f172a;--border:#1e293b;
-  --txt:#e5e7eb;--muted:#93a3b8;
-  --pri:#22c55e;--pri2:#16a34a;--brand:#6a0dad;
-}
-*{box-sizing:border-box} html,body{margin:0}
-body{background:var(--bg);color:var(--txt);font-family:-apple-system,system-ui,Segoe UI,Arial;line-height:1.6}
-a{color:inherit;text-decoration:none}
-.container{max-width:1100px;margin:auto;padding:16px 20px}
-header{position:sticky;top:0;z-index:20;background:rgba(11,16,32,.75);backdrop-filter:blur(6px);border-bottom:1px solid var(--border)}
-.nav{display:flex;gap:14px;align-items:center;justify-content:space-between}
-.brand{display:flex;gap:10px;align-items:center}
-.badge{background:var(--brand);color:#fff;padding:6px 10px;border-radius:8px;font-weight:800}
-.langs, .navlinks{display:flex;gap:10px;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;border:1px solid #334155;background:#111a2e;color:#e5e7eb;cursor:pointer}
-.btn.pri{border-color:transparent;background:linear-gradient(135deg,var(--pri),var(--pri2));color:#0b1220;font-weight:800}
-.btn.small{padding:6px 10px;border-radius:10px}
-.chip{background:#0f1a2e;border:1px solid var(--border);padding:6px 10px;border-radius:10px;color:var(--muted)}
-.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px}
-.grid{display:grid;gap:16px}
-.grid-2{grid-template-columns:1fr 1fr}
-.grid-3{grid-template-columns:repeat(3,1fr)}
-label{font-weight:600;font-size:14px}
-input,select,textarea{width:100%;background:#0e1629;color:#e5e7eb;border:1px solid var(--border);border-radius:10px;padding:10px 12px}
-textarea{min-height:90px;resize:vertical}
-.section{padding:26px 0}
-h1,h2,h3,h4{margin:0 0 10px}
-.muted{color:var(--muted)}
-.list{display:grid;gap:12px}
-.item{display:grid;gap:10px;border:1px solid var(--border);border-radius:14px;background:#0d1426;padding:12px}
-.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.price{font-weight:900}
-.bad{color:#f87171}.good{color:#4ade80}
-footer{border-top:1px solid var(--border);padding:20px 0;color:var(--muted);text-align:center;margin-top:28px}
-@media(max-width:900px){.grid-2,.grid-3{grid-template-columns:1fr}}
-</style>
-</head>
-<body>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Mazad Bazar — مزاد بازار</title>
 
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#0b1020">
+  <link rel="icon" sizes="192x192" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+
+  <style>
+    :root{
+      --bg:#0b1020;--card:#0f172a;--muted:#93a3b8;--txt:#e5e7eb;
+      --pri:#22c55e;--pri2:#16a34a;--brand:#6a0dad;--border:#1e293b;
+      --danger:#ef4444;--warn:#f59e0b;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;height:100%}
+    body{
+      font-family: system-ui, -apple-system, Segoe UI, Arial;
+      background:var(--bg); color:var(--txt); line-height:1.6;
+    }
+    a{color:inherit; text-decoration:none}
+    .container{max-width:1100px; margin:auto; padding:16px 20px}
+
+    header{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(6px);
+      background:rgba(11,16,32,.75);
+      border-bottom:1px solid var(--border);
+    }
+    .row{display:flex; gap:14px; align-items:center; justify-content:space-between}
+    .brand{display:flex; gap:10px; align-items:center}
+    .badge{background:var(--brand); color:#fff; padding:6px 10px; border-radius:8px; font-weight:800}
+    .nav{display:flex; gap:10px; flex-wrap:wrap}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
+      padding:10px 14px; border:1px solid var(--border); border-radius:10px;
+      background:#0f172a; color:var(--txt); cursor:pointer; font-weight:600;
+      transition:.18s ease;
+    }
+    .btn:hover{transform:translateY(-1px); box-shadow:0 6px 16px rgba(0,0,0,.25)}
+    .btn.pri{border-color:transparent; background:linear-gradient(135deg, var(--pri), var(--pri2))}
+    .btn.warn{background:var(--warn); border-color:transparent; color:#111}
+    .btn.danger{background:var(--danger); border-color:transparent}
+    .btn.sm{padding:6px 10px; font-weight:700}
+    input,select,textarea{
+      width:100%; background:#0f172a; color:var(--txt);
+      border:1px solid var(--border); border-radius:10px; padding:12px 12px;
+    }
+    textarea{min-height:110px; resize:vertical}
+    .card{
+      background:var(--card); border:1px solid var(--border);
+      border-radius:16px; padding:16px;
+    }
+    .grid{display:grid; gap:16px}
+    .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+    @media (max-width:900px){ .grid.cols-3{grid-template-columns:1fr} .row{flex-wrap:wrap} }
+    .pill{padding:6px 10px; border-radius:999px; background:#101826; border:1px solid var(--border); font-weight:700}
+    .muted{color:var(--muted)}
+    .hr{height:1px;background:var(--border);margin:18px 0}
+    .hide{display:none !important}
+    .right{direction:rtl} .left{direction:ltr}
+  </style>
+</head>
+
+<body>
 <header>
-  <div class="container nav">
+  <div class="container row">
     <div class="brand">
-      <span class="badge">MB</span>
-      <strong>Mazad — Bazar</strong>
+      <div class="badge">MB</div>
+      <div>
+        <div style="font-size:18px;font-weight:900">Mazad – Bazar</div>
+        <div class="muted" style="font-size:12px" data-i="tagline">پۆرتاڵی سادەی مزایدة</div>
+      </div>
     </div>
 
-    <nav class="navlinks">
-      <a class="btn small" href="#postForm" data-i="nav_add">زیادکردنی کاڵا</a>
-      <a class="btn small" href="#market" data-i="nav_market">بازار</a>
-      <a class="btn small" href="#admin" data-i="nav_admin">پەڕەی ئەدمین</a>
-    </nav>
+    <div class="nav">
+      <select id="lang" class="pill">
+        <option value="ckb">کوردی</option>
+        <option value="ar">العربية</option>
+        <option value="en">English</option>
+      </select>
 
-    <div class="langs">
-      <button class="btn small" data-lang="ckb">کوردی</button>
-      <button class="btn small" data-lang="ar">العربية</button>
-      <button class="btn small" data-lang="en">English</button>
+      <button class="btn sm" id="btn-login"><span data-i="login">چوونەژوورەوە</span></button>
+      <button class="btn sm warn hide" id="btn-logout"><span data-i="logout">چوونەدەرەوە</span></button>
+      <button class="btn sm pri" id="btn-new"><span data-i="addItem">زیادکردنی کاڵا</span> ⊕</button>
     </div>
   </div>
 </header>
@@ -68,400 +95,351 @@ footer{border-top:1px solid var(--border);padding:20px 0;color:var(--muted);text
 <main class="container">
 
   <!-- HERO -->
-  <section class="section card">
-    <h2 data-i="hero_title">🚀 بەخێربێن بۆ «مزاد بازار»</h2>
-    <p class="muted" data-i="hero_desc">
-      پۆرتاڵێکی سادەی مزایدة – نرخی سەرەتایی «٠»؛ کرێداران تەنها نرخیان زیاد دەکەن.
-    </p>
-    <div class="row">
-      <a class="btn pri" href="#postForm" data-i="cta_add">زیادکردنی کاڵا</a>
-      <a class="btn" href="#market" data-i="cta_market">بینینی بازار</a>
-    </div>
-  </section>
-
-  <!-- POST FORM -->
-  <section id="postForm" class="section">
-    <h3 data-i="form_title">➕ زیادکردنی کاڵا</h3>
-    <div class="card">
-      <form id="newPostForm">
-        <div class="grid grid-2">
-          <div>
-            <label data-i="f_name">ناوی کاڵا</label>
-            <input required name="name" placeholder="مثلاً: مۆبایل S23"/>
-          </div>
-          <div>
-            <label data-i="f_city">شار/شوێن</label>
-            <input required name="city" placeholder="هەولێر / سلێمانی"/>
-          </div>
-          <div>
-            <label data-i="f_phone">ژمارەی تەلەفون</label>
-            <input required name="phone" inputmode="tel" placeholder="07xxxxxxxxx"/>
-          </div>
-          <div>
-            <label data-i="f_img">لینکی وێنە (ئێختیاری)</label>
-            <input name="image" placeholder="https://…"/>
-          </div>
-        </div>
-        <div style="margin-top:10px">
-          <label data-i="f_desc">وەسف</label>
-          <textarea name="desc" placeholder="کورتە وەسفێک بنووسە…"></textarea>
-        </div>
-
-        <div class="grid grid-3" style="margin-top:10px">
-          <div>
-            <label data-i="f_mode">جۆری فرۆشتن</label>
-            <select name="saleMode">
-              <option value="auction" selected data-i="mode_auction">مزایدة</option>
-              <option value="fib" data-i="mode_fib">FIB</option>
-              <option value="fastbay" data-i="mode_fastbay">FastBay</option>
-            </select>
-          </div>
-          <div>
-            <label data-i="f_base">نرخی سەرەتایی</label>
-            <input name="base" type="number" value="0" min="0" />
-            <small class="muted" data-i="f_base_hint">خاوەنی پۆست ناتوانێت نرخی سەرەتایی زیادی بکات—«٠» پێویستە</small>
-          </div>
-          <div>
-            <label data-i="f_step">قەدەنەی زیادبوون</label>
-            <input name="step" type="number" value="1000" min="250"/>
-          </div>
-        </div>
-
-        <div class="row" style="margin-top:12px">
-          <button class="btn pri" type="submit" data-i="f_submit">ناردن بۆ پشکنین</button>
-          <span class="chip" id="feeInfo"></span>
-        </div>
-        <p class="muted" style="margin-top:6px" data-i="fee_note">
-          بۆ پۆستەکان بە FIB/FastBay فیسێکی خزمەتگوزاری (٢٠٠٠ دینار) هەیە.
+  <section class="card" id="hero">
+    <div class="row" style="align-items:flex-start">
+      <div style="max-width:680px">
+        <h2 style="margin:0 0 8px" data-i="welcomeTitle">🚀 بەخێربێیت بۆ «مزاد بازار»</h2>
+        <p class="muted" data-i="welcomeDesc">
+          پڕۆژەیەکی سادەی مزایدة. دەتوانیت کاڵا بنووسی، بە دوگمەی بید نرخ زیاد بکەی،
+          و ئەدمین دەتوانێت پۆستەکان پشکنین بکات (قبوول / ڕەد).
         </p>
-      </form>
+        <div class="hr"></div>
+        <div class="pill left" style="display:inline-block">
+          <b data-i="feeLabel">کرێی پۆستکردن:</b> <span id="fee">2000</span> IQD
+          • <b>FastPay / FIB</b> → <span id="wallet">07827513551</span>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- MARKET -->
-  <section id="market" class="section">
-    <h3 data-i="market_title">🛒 بازار</h3>
-    <div id="marketList" class="list"></div>
+  <!-- CREATE / EDIT ITEM -->
+  <section class="card hide" id="create">
+    <h3 style="margin-top:0" data-i="createTitle">زیادکردنی پۆست</h3>
+    <div class="grid">
+      <label><span data-i="fTitle">ناونیشان</span>
+        <input id="f-title" placeholder="…"/></label>
+      <label><span data-i="fPrice">نرخی دەستپێک (IQD)</span>
+        <input id="f-price" type="number" min="0" value="0"/></label>
+      <label><span data-i="fCategory">هاوپۆل</span>
+        <select id="f-cat">
+          <option value="general" data-i="catGeneral">گشتی</option>
+          <option value="phones" data-i="catPhones">مۆبایل</option>
+          <option value="cars" data-i="catCars">ئۆتۆمبێل</option>
+          <option value="digital" data-i="catDigital">دیجیتاڵ</option>
+        </select>
+      </label>
+      <label style="grid-column:1/-1"><span data-i="fDesc">وەسف/زانیاری زۆرتر</span>
+        <textarea id="f-desc" placeholder="…"></textarea></label>
+      <label style="grid-column:1/-1"><span data-i="fImage">وێنە (URL یەک یان چەندین بە کۆما)</span>
+        <input id="f-images" placeholder="https://… , https://…"/></label>
+
+      <div class="hr" style="grid-column:1/-1"></div>
+
+      <div style="grid-column:1/-1">
+        <b data-i="payTitle">پارەدان بۆ ناردنی پۆست (2000 IQD):</b><br/>
+        <label class="pill"><input type="radio" name="pay" value="FastPay" checked> FastPay</label>
+        <label class="pill"><input type="radio" name="pay" value="FIB"> FIB</label>
+        <div class="muted" style="margin-top:8px" data-i="payNote">
+          تکایە 2000 IQD بۆ ژمارەی <b id="wallet2">07827513551</b> بنێرە و ژمارەی مامەڵە/رسید داخڵ بکە.
+        </div>
+      </div>
+
+      <label style="grid-column:1/-1"><span data-i="fTxn">ژمارەی مامەڵە/رسید</span>
+        <input id="f-txn" placeholder="#TXN12345"/></label>
+    </div>
+    <div class="row" style="margin-top:14px; justify-content:flex-end">
+      <button class="btn" id="btn-cancel" data-i="cancel">هەڵوەشاندنەوە</button>
+      <button class="btn pri" id="btn-save" data-i="submitPost">ناردنی پۆست</button>
+    </div>
+    <div class="muted" style="margin-top:10px" data-i="createFoot">
+      تێبینی: ئەدمین پۆستەکە دەبینێت؛ دەتوانێت قبوول یان ڕەد بکات و هۆکار بنووسێت.
+    </div>
   </section>
+
+  <!-- LISTINGS -->
+  <section class="grid cols-3" id="list"></section>
 
   <!-- ADMIN -->
-  <section id="admin" class="section">
-    <h3 data-i="admin_title">🔐 پەڕەی ئەدمین</h3>
-    <div class="card">
-      <div class="grid grid-3">
-        <div>
-          <label data-i="login_role">ڕۆڵ</label>
-          <select id="roleSelect">
-            <option value="viewer" selected data-i="r_viewer">بینەر</option>
-            <option value="admin" data-i="r_admin">ئەدمین</option>
-            <option value="super" data-i="r_super">سوپەرئەدمین</option>
-          </select>
-        </div>
-        <div>
-          <label data-i="login_user">ناو</label>
-          <input id="loginUser" placeholder="username"/>
-        </div>
-        <div>
-          <label data-i="login_pass">وشەی نهێنی</label>
-          <input id="loginPass" type="password" placeholder="•••••"/>
-        </div>
-      </div>
-      <div class="row" style="margin-top:10px">
-        <button class="btn pri" id="btnLogin" data-i="login_btn">چۆونەژوورەوە</button>
-        <span class="chip" id="loginState">guest</span>
-      </div>
-    </div>
+  <section class="card hide" id="admin">
+    <h3 style="margin:0 0 10px" data-i="adminTitle">لووحەی ئەdmین</h3>
+    <details>
+      <summary class="pill" data-i="pendingPosts">پۆستە چاوەڕوانەکان</summary>
+      <div id="pending" class="grid" style="margin-top:14px"></div>
+    </details>
 
-    <div class="grid grid-2" style="margin-top:14px">
-      <div class="card">
-        <h4 data-i="admin_pending">پۆستە چاوەروانەکان</h4>
-        <div id="pendingList" class="list"></div>
-      </div>
+    <div class="hr"></div>
 
-      <div class="card">
-        <h4 data-i="admin_tools">ئامرازەکان</h4>
-        <div id="adminTools">
-          <p class="muted" data-i="admin_needlogin">پێویستە بە شێوەی ئەدمین/سوپەر بچیتە ژوورەوە.</p>
-        </div>
+    <details>
+      <summary class="pill" data-i="settings">ڕێکخستنەکان</summary>
+      <div class="grid" style="margin-top:10px">
+        <label><span data-i="feeLabel">کرێی پۆستکردن (IQD)</span>
+          <input id="set-fee" type="number" min="0" value="2000"></label>
+        <label><span data-i="walletLabel">ژمارەی پارەوەران</span>
+          <input id="set-wallet" value="07827513551"></label>
+        <button class="btn pri" id="btn-save-settings" data-i="save">پاشەکەوت</button>
       </div>
-    </div>
+    </details>
+
+    <div class="hr"></div>
+
+    <details id="super-block" class="hide">
+      <summary class="pill">Super Admin</summary>
+      <div class="grid" style="margin-top:10px">
+        <label>Admins (comma separated usernames)
+          <input id="set-admins" placeholder="admin,ali,dlshad"></label>
+        <button class="btn pri" id="btn-save-admins" data-i="save">پاشەکەوت</button>
+      </div>
+    </details>
   </section>
 
 </main>
 
-<footer>
-  <div>© Mazad Bazar — PWA demo. Wallet: <b>07827513551</b></div>
-  <div class="muted" id="walletInfo"></div>
-</footer>
+<!-- AUTH MODAL (simple) -->
+<div id="auth" class="hide" style="
+  position:fixed; inset:0; background:rgba(0,0,0,.6);
+  display:flex; align-items:center; justify-content:center;">
+  <div class="card" style="width:min(520px,95vw)">
+    <h3 style="margin-top:0" data-i="login">چوونەژوورەوە</h3>
+    <div class="grid">
+      <label><span data-i="username">ناوی بەکارهێنەر</span>
+        <input id="u-name" placeholder="مثال: kurosh"/></label>
+      <label><span data-i="password">وشەی نهێنی</span>
+        <input id="u-pass" type="password" placeholder="…"/></label>
+      <label><span data-i="role">ڕۆڵ</span>
+        <select id="u-role">
+          <option value="user" data-i="roleUser">بەکارهێنەر</option>
+          <option value="admin" data-i="roleAdmin">ئەdmین</option>
+          <option value="super" data-i="roleSuper">سووپەر ئەdmین</option>
+        </select>
+      </label>
+    </div>
+    <div class="row" style="margin-top:12px; justify-content:flex-end">
+      <button class="btn" id="a-cancel" data-i="cancel">هەڵوەشاندنەوە</button>
+      <button class="btn pri" id="a-ok" data-i="login">چوونەژوورەوە</button>
+    </div>
+    <div class="muted" style="margin-top:8px">
+      demo:
+      <code>super / super123 (سووپەر)</code> —
+      <code>admin / admin123 (ئەdmین)</code>
+    </div>
+  </div>
+</div>
 
 <script>
-/* ========= i18n ========= */
-const L = {
+/* ===== i18n ===== */
+const T = {
   ckb:{
-    nav_add:"زیادکردنی کاڵا", nav_market:"بازار", nav_admin:"پەڕەی ئەدمین",
-    hero_title:"🚀 بەخێربێن بۆ «مزاد بازار»",
-    hero_desc:"پۆرتاڵێکی سادەی مزایدة – نرخی سەرەتایی «٠»؛ کرێداران تەنها نرخیان زیاد دەکەن.",
-    cta_add:"زیادکردنی کاڵا", cta_market:"بینینی بازار",
-
-    form_title:"➕ زیادکردنی کاڵا",
-    f_name:"ناوی کاڵا", f_city:"شار/شوێن", f_phone:"ژمارەی تەلەفون", f_img:"لینکی وێنە (ئێختیاری)",
-    f_desc:"وەسف", f_mode:"جۆری فرۆشتن", mode_auction:"مزایدة", mode_fib:"FIB", mode_fastbay:"FastBay",
-    f_base:"نرخی سەرەتایی", f_base_hint:"خاوەنی پۆست ناتوانێت نرخی سەرەتایی زیادی بکات—«٠» پێویستە",
-    f_step:"قەدەنەی زیادبوون", f_submit:"ناردن بۆ پشکنین", fee_note:"بۆ پۆستەکان بە FIB/FastBay فیسێکی خزمەتگوزاری (٢٠٠٠ دینار) هەیە.",
-    market_title:"🛒 بازار",
-
-    admin_title:"🔐 پەڕەی ئەدمین", login_role:"ڕۆڵ", r_viewer:"بینەر", r_admin:"ئەدمین", r_super:"سوپەرئەدمین",
-    login_user:"ناو", login_pass:"وشەی نهێنی", login_btn:"چۆونەژوورەوە",
-    admin_pending:"پۆستە چاوەروانەکان", admin_tools:"ئامرازەکان", admin_needlogin:"پێویستە بە شێوەی ئەدمین/سوپەر بچیتە ژوورەوە.",
-
-    b_approve:"پەسەندکردن", b_reject:"ڕەتکردن", reason_ph:"هۆکاری ڕەتکردن", status_pending:"چاوەروان", status_ok:"پەسەندکرا", status_no:"ڕەتکرا",
-    inc:"زیادکردنی نرخ", paymsg:"بەرواری پارەدان بۆ فیس: ٢٠٠٠ دینار → 07827513551"
+    tagline:"پۆرتاڵی سادەی مزایدة",
+    welcomeTitle:"🚀 بەخێربێیت بۆ «مزاد بازار»",
+    welcomeDesc:"پۆست بنووسە، بە دوگمەی بید نرخ زیاد بکە، ئەdmین دەتوانێت قبوول/ڕەد بکات.",
+    login:"چوونەژوورەوە", logout:"چوونەدەرەوە", addItem:"زیادکردنی کاڵا",
+    createTitle:"زیادکردنی پۆست", fTitle:"ناونیشان", fPrice:"نرخی دەستپێک (IQD)",
+    fCategory:"هاوپۆل", catGeneral:"گشتی", catPhones:"مۆبایل", catCars:"ئۆتۆمبێل", catDigital:"دیجیتاڵ",
+    fDesc:"وەسف/زانیاری", fImage:"وێنە (URL بە کۆما جیا بکە)", payTitle:"پارەدان",
+    payNote:"تکایە 2000 IQD بۆ ژمارەکە بنێرە و ژمارەی مامەڵە داخڵ بکە.",
+    fTxn:"ژمارەی مامەڵە", cancel:"هەڵوەشاندنەوە", submitPost:"ناردنی پۆست",
+    createFoot:"پاش ناردن، پۆستەکە چاوەڕوانی قبوولکردنی ئەdmین دەبێت.",
+    adminTitle:"لووحەی ئەdmین", pendingPosts:"پۆستە چاوەڕوانەکان", settings:"ڕێکخستنەکان",
+    feeLabel:"کرێی پۆستکردن", walletLabel:"ژمارەی پارەوەران", save:"پاشەکەوت",
+    username:"ناوی بەکارهێنەر", password:"وشەی نهێنی", role:"ڕۆڵ",
+    roleUser:"بەکارهێنەر", roleAdmin:"ئەdmین", roleSuper:"سووپەر ئەdmین",
+    bid:"+ زیادکردنی نرخ", approve:"قبوول", reject:"ڕەدکردن", reason:"هۆکار",
+    by:"لەلایەن", payMethod:"شێوازی پارەدان", status:"دۆخ", pending:"چاوەڕوان",
+    approved:"قبوولکرا", rejected:"ڕەدکرا"
   },
   ar:{
-    nav_add:"إضافة منتج", nav_market:"السوق", nav_admin:"لوحة الإدارة",
-    hero_title:"🚀 أهلاً بك في مزاد بازار", hero_desc:"بوابة مزايدات بسيطة – السعر الابتدائي «0»، والزبائن يرفعون السعر فقط.",
-    cta_add:"أضف منتجًا", cta_market:"عرض السوق",
-
-    form_title:"➕ إضافة منتج", f_name:"اسم المنتج", f_city:"المدينة/الموقع", f_phone:"رقم الهاتف", f_img:"رابط الصورة (اختياري)",
-    f_desc:"الوصف", f_mode:"طريقة البيع", mode_auction:"مزايدة", mode_fib:"FIB", mode_fastbay:"FastBay",
-    f_base:"السعر الابتدائي", f_base_hint:"لا يمكن للناشر رفع السعر الابتدائي — يجب أن يكون «0».",
-    f_step:"خطوة الزيادة", f_submit:"إرسال للمراجعة", fee_note:"للإعلانات FIB/FastBay توجد رسوم خدمة (2000 دينار).",
-    market_title:"🛒 السوق",
-
-    admin_title:"🔐 لوحة الإدارة", login_role:"الدور", r_viewer:"مشاهد", r_admin:"مدير", r_super:"مشرف عام",
-    login_user:"المستخدم", login_pass:"كلمة المرور", login_btn:"تسجيل الدخول",
-    admin_pending:"المنشورات قيد المراجعة", admin_tools:"أدوات", admin_needlogin:"سجّل دخولك كمدير/مشرف.",
-
-    b_approve:"قبول", b_reject:"رفض", reason_ph:"سبب الرفض", status_pending:"قيد المراجعة", status_ok:"مقبول", status_no:"مرفوض",
-    inc:"زيادة السعر", paymsg:"سداد رسوم الخدمة: 2000 دينار → 07827513551"
+    tagline:"بوابة مزاد بسيطة",
+    welcomeTitle:"🚀 أهلاً بك في «مزاد بازار»",
+    welcomeDesc:"أضف منشوراً، زد السعر بزرّ المزايدة، والمدير يوافق أو يرفض.",
+    login:"تسجيل الدخول", logout:"تسجيل الخروج", addItem:"إضافة سلعة",
+    createTitle:"إضافة منشور", fTitle:"العنوان", fPrice:"السعر الابتدائي (IQD)",
+    fCategory:"الفئة", catGeneral:"عام", catPhones:"هواتف", catCars:"سيارات", catDigital:"رقمي",
+    fDesc:"الوصف/تفاصيل", fImage:"صورة (روابط مفصولة بفواصل)", payTitle:"الدفع",
+    payNote:"ادفع 2000 دينار إلى الرقم أدناه وأدخل رقم العملية.",
+    fTxn:"رقم العملية", cancel:"إلغاء", submitPost:"إرسال",
+    createFoot:"بعد الإرسال ينتظر المنشور موافقة المدير.",
+    adminTitle:"لوحة المدير", pendingPosts:"المنشورات المعلقة", settings:"الإعدادات",
+    feeLabel:"رسوم النشر", walletLabel:"رقم الدفع", save:"حفظ",
+    username:"اسم المستخدم", password:"كلمة السر", role:"الدور",
+    roleUser:"مستخدم", roleAdmin:"مدير", roleSuper:"مدير أعلى",
+    bid:"+ مزايدة", approve:"موافقة", reject:"رفض", reason:"السبب",
+    by:"بواسطة", payMethod:"طريقة الدفع", status:"الحالة",
+    pending:"معلّق", approved:"مقبول", rejected:"مرفوض"
   },
   en:{
-    nav_add:"Add Item", nav_market:"Market", nav_admin:"Admin",
-    hero_title:"🚀 Welcome to Mazad Bazar", hero_desc:"Simple auction portal — base price is ‘0’; buyers only increase.",
-    cta_add:"Add Item", cta_market:"View Market",
-
-    form_title:"➕ Add Item", f_name:"Item name", f_city:"City/Location", f_phone:"Phone number", f_img:"Image URL (optional)",
-    f_desc:"Description", f_mode:"Sale mode", mode_auction:"Auction", mode_fib:"FIB", mode_fastbay:"FastBay",
-    f_base:"Base price", f_base_hint:"Owner cannot set a base price > 0 — must be ‘0’.",
-    f_step:"Bid step", f_submit:"Submit for review", fee_note:"FIB/FastBay posts require a 2,000 IQD service fee.",
-    market_title:"🛒 Market",
-
-    admin_title:"🔐 Admin", login_role:"Role", r_viewer:"Viewer", r_admin:"Admin", r_super:"Super Admin",
-    login_user:"Username", login_pass:"Password", login_btn:"Sign in",
-    admin_pending:"Pending posts", admin_tools:"Tools", admin_needlogin:"Please sign in as admin/super admin.",
-
-    b_approve:"Approve", b_reject:"Reject", reason_ph:"Rejection reason", status_pending:"Pending", status_ok:"Approved", status_no:"Rejected",
-    inc:"Increase bid", paymsg:"Service fee due: 2,000 IQD → 07827513551"
+    tagline:"Simple auction portal",
+    welcomeTitle:"🚀 Welcome to Mazad Bazar",
+    welcomeDesc:"Create a post, bid with one click, and admins can approve or reject.",
+    login:"Login", logout:"Logout", addItem:"Add Item",
+    createTitle:"Create Post", fTitle:"Title", fPrice:"Start Price (IQD)",
+    fCategory:"Category", catGeneral:"General", catPhones:"Phones", catCars:"Cars", catDigital:"Digital",
+    fDesc:"Description", fImage:"Images (URLs comma separated)", payTitle:"Payment",
+    payNote:"Please pay 2000 IQD to the wallet below and enter your transaction id.",
+    fTxn:"Transaction ID", cancel:"Cancel", submitPost:"Submit Post",
+    createFoot:"After submission, the post waits for admin approval.",
+    adminTitle:"Admin Panel", pendingPosts:"Pending posts", settings:"Settings",
+    feeLabel:"Post Fee", walletLabel:"Wallet/Number", save:"Save",
+    username:"Username", password:"Password", role:"Role",
+    roleUser:"User", roleAdmin:"Admin", roleSuper:"Super Admin",
+    bid:"+ Bid", approve:"Approve", reject:"Reject", reason:"Reason",
+    by:"by", payMethod:"Payment", status:"Status",
+    pending:"Pending", approved:"Approved", rejected:"Rejected"
   }
 };
-let lang = localStorage.getItem("mb_lang") || "ckb";
-function applyI18n(){
-  document.querySelectorAll("[data-i]").forEach(el=>{
-    const key=el.dataset.i; el.textContent = L[lang][key] || el.textContent;
-  });
-  document.getElementById("feeInfo").textContent = L[lang].paymsg;
-}
-document.querySelectorAll("[data-lang]").forEach(b=>{
-  b.onclick=()=>{lang=b.dataset.lang; localStorage.setItem("mb_lang",lang); applyI18n(); renderAll();}
+const $ = s=>document.querySelector(s);
+const $$ = s=>document.querySelectorAll(s);
+function tr(){ const L=T[state.lang]; $$('[data-i]').forEach(el=>{const k=el.getAttribute('data-i'); if(L[k]) el.textContent=L[k];}); document.documentElement.lang=state.lang; document.documentElement.dir=(state.lang==='en'?'ltr':'rtl'); }
+$('#lang').addEventListener('change',e=>{state.lang=e.target.value; saveState(); tr(); render();});
+
+/* ===== State / Storage ===== */
+const LS = {
+  load(key,def){ try{ return JSON.parse(localStorage.getItem(key)) ?? def; }catch{ return def; } },
+  save(key,val){ localStorage.setItem(key, JSON.stringify(val)); }
+};
+let state = LS.load('mb_state',{
+  lang:'ckb',
+  session:null, // {name,role}
 });
-applyI18n();
+let db = LS.load('mb_db',{
+  settings:{fee:2000,wallet:'07827513551',admins:['admin']},
+  items:[] // {id,title,desc,images[],price,owner,method,txn,status,reason,bids:[]}
+});
+function saveDB(){ LS.save('mb_db',db); }
+function saveState(){ LS.save('mb_state',state); }
 
-/* ========= Data (localStorage) ========= */
-const DB = {
-  posts: JSON.parse(localStorage.getItem("mb_posts")||"[]"),
-  admins: JSON.parse(localStorage.getItem("mb_admins")||'["admin"]'),
-  super: JSON.parse(localStorage.getItem("mb_super")||'["root"]'),
-  wallet: JSON.parse(localStorage.getItem("mb_wallet")||'{"07827513551":0}')
+/* ===== Auth (demo) ===== */
+$('#btn-login').onclick = ()=>$('#auth').classList.remove('hide');
+$('#a-cancel').onclick = ()=>$('#auth').classList.add('hide');
+$('#a-ok').onclick = ()=>{
+  const name=$('#u-name').value.trim(); const pass=$('#u-pass').value.trim(); const role=$('#u-role').value;
+  // demo passwords
+  const ok = (role==='super' && name==='super' && pass==='super123')
+          || (role==='admin' && (db.settings.admins.includes(name)) && pass==='admin123')
+          || (role==='user'  && name && pass);
+  if(!ok){ alert('Login failed'); return; }
+  state.session={name,role}; saveState(); $('#auth').classList.add('hide'); render();
 };
-function save(){ localStorage.setItem("mb_posts", JSON.stringify(DB.posts));
-  localStorage.setItem("mb_admins", JSON.stringify(DB.admins));
-  localStorage.setItem("mb_super", JSON.stringify(DB.super));
-  localStorage.setItem("mb_wallet", JSON.stringify(DB.wallet));
-  renderAll();
-}
+$('#btn-logout').onclick = ()=>{ state.session=null; saveState(); render(); };
 
-/* ========= Auth (demo) ========= */
-let session = {role:"viewer", user:"guest"};
-function login(r,u,p){
-  if(r==="admin" && DB.admins.includes(u) && p==="admin123"){session={role:"admin",user:u}}
-  else if(r==="super" && DB.super.includes(u) && p==="root123"){session={role:"super",user:u}}
-  else if(r==="viewer"){session={role:"viewer",user:u||"guest"}}
-  else {alert("⚠️ هەڵە لە تێپەڕەوشە یان ناو."); return;}
-  document.getElementById("loginState").textContent = `${session.role} • ${session.user}`;
-  renderAdminTools();
-}
-document.getElementById("btnLogin").onclick=()=>{
-  login(document.getElementById("roleSelect").value,
-        document.getElementById("loginUser").value.trim(),
-        document.getElementById("loginPass").value.trim());
+/* ===== Create Post ===== */
+$('#btn-new').onclick = ()=>{
+  if(!state.session){ $('#auth').classList.remove('hide'); return; }
+  $('#create').classList.remove('hide'); window.scrollTo(0,0);
+};
+$('#btn-cancel').onclick = ()=>$('#create').classList.add('hide');
+$('#btn-save').onclick = ()=>{
+  const title=$('#f-title').value.trim();
+  const price=Number($('#f-price').value||0);
+  const desc=$('#f-desc').value.trim();
+  const images=($('#f-images').value||'').split(',').map(s=>s.trim()).filter(Boolean);
+  const txn=$('#f-txn').value.trim();
+  const method=(document.querySelector('input[name=pay]:checked')||{}).value || 'FastPay';
+  if(!title || !txn){ alert('Fill title & transaction'); return; }
+  const it={ id:Date.now(), title, desc, images, price, owner:state.session?.name||'guest',
+             method, txn, status:'pending', reason:'', bids:[] };
+  db.items.unshift(it); saveDB();
+  $('#create').classList.add('hide');
+  alert('Post submitted. Waiting for admin.');
+  render();
 };
 
-/* ========= New Post ========= */
-document.getElementById("newPostForm").onsubmit=(e)=>{
-  e.preventDefault();
-  const fd = new FormData(e.target);
-  const item = {
-    id: Date.now(),
-    name: fd.get("name").trim(),
-    city: fd.get("city").trim(),
-    phone: fd.get("phone").trim(),
-    image: fd.get("image").trim(),
-    desc: fd.get("desc").trim(),
-    saleMode: fd.get("saleMode"),
-    base: 0, // enforce
-    step: Math.max(250, parseInt(fd.get("step")||"1000",10)),
-    price: 0,
-    status: "pending",
-    reason: "",
-    ownerPaid: false
+/* ===== Render Listings ===== */
+function el(tag,props={}){ const x=document.createElement(tag); Object.assign(x,props); return x; }
+function renderList(){
+  const wrap = $('#list'); wrap.innerHTML='';
+  db.items.filter(it=>it.status==='approved').forEach(it=>{
+    const card=el('div',{className:'card'});
+    const img = el('img',{src: it.images?.[0]||'https://picsum.photos/600/400?random='+it.id, alt:'', style:'width:100%;border-radius:12px'});
+    const t   = el('h3',{textContent:it.title, style:'margin:10px 0 6px'});
+    const by  = el('div',{className:'muted', innerHTML:`<b data-i="by">${T[state.lang].by}</b> ${it.owner}`});
+    const p   = el('div',{className:'pill left', innerHTML:`IQD <b>${fmt(it.price)}</b>`});
+    const row = el('div',{className:'row', style:'margin-top:10px'});
+    const b1  = el('button',{className:'btn sm pri', innerText:`${T[state.lang].bid} 1k`});
+    const b2  = el('button',{className:'btn sm pri', innerText:`${T[state.lang].bid} 5k`});
+    b1.onclick=()=>bid(it,1000); b2.onclick=()=>bid(it,5000);
+    row.append(b1,b2);
+    card.append(img,t,by,p,row);
+    wrap.append(card);
+  });
+}
+function bid(it,inc){
+  if(!state.session){ $('#auth').classList.remove('hide'); return; }
+  it.price += inc; it.bids.push({by:state.session.name,inc,at:Date.now()}); saveDB(); renderList();
+}
+function fmt(n){ return (n||0).toLocaleString(); }
+
+/* ===== Admin Panel ===== */
+function renderAdmin(){
+  const isAdmin = state.session && (state.session.role==='admin' || state.session.role==='super');
+  $('#admin').classList.toggle('hide', !isAdmin);
+  $('#super-block').classList.toggle('hide', !(state.session && state.session.role==='super'));
+  if(!isAdmin) return;
+
+  // settings
+  $('#set-fee').value = db.settings.fee;
+  $('#set-wallet').value = db.settings.wallet;
+  $('#set-admins').value = (db.settings.admins||[]).join(',');
+
+  // pending
+  const p = $('#pending'); p.innerHTML='';
+  db.items.filter(it=>it.status==='pending').forEach(it=>{
+    const card=el('div',{className:'card'});
+    card.innerHTML = `
+      <div class="row">
+        <div><b>${it.title}</b> — <span class="muted">${T[state.lang].by}: ${it.owner}</span></div>
+        <span class="pill">${T[state.lang].payMethod}: ${it.method} • TXN: ${it.txn}</span>
+      </div>
+      <div class="muted" style="margin:6px 0">${it.desc||''}</div>
+      <div class="row" style="justify-content:flex-end; gap:8px">
+        <input class="pill" id="rea-${it.id}" placeholder="${T[state.lang].reason}" style="min-width:160px">
+        <button class="btn sm danger" id="r-${it.id}">${T[state.lang].reject}</button>
+        <button class="btn sm pri" id="a-${it.id}">${T[state.lang].approve}</button>
+      </div>`;
+    p.append(card);
+    $(`#a-${it.id}`).onclick = ()=>{ it.status='approved'; it.reason=''; saveDB(); render(); };
+    $(`#r-${it.id}`).onclick = ()=>{
+      it.status='rejected'; it.reason=$(`#rea-${it.id}`).value||'—'; saveDB(); render();
+    };
+  });
+
+  // save settings
+  $('#btn-save-settings').onclick = ()=>{
+    db.settings.fee = Number($('#set-fee').value||0);
+    db.settings.wallet = $('#set-wallet').value.trim()||db.settings.wallet;
+    saveDB(); render();
+    alert('Saved.');
   };
-  // fee rule for FIB/FastBay
-  if(item.saleMode!=="auction"){
-    item.ownerPaid = true; // demo: mark as paid automatically
-    DB.wallet["07827513551"] = (DB.wallet["07827513551"]||0) + 2000;
-    alert(L[lang].paymsg + "\n(دیمۆ: وەک پارەدرا هەژمار کرا)");
-  }
-  DB.posts.unshift(item); save();
-  e.target.reset();
-  alert("✅ ناردرا بۆ پشکنین.");
-};
-
-/* ========= Market Rendering & Bidding ========= */
-function postCard(p, adminView=false){
-  const statusMap = {pending:L[lang].status_pending, approved:L[lang].status_ok, rejected:L[lang].status_no};
-  const wrap = document.createElement("div"); wrap.className="item";
-  const top = document.createElement("div"); top.className="row";
-  top.innerHTML = `<strong>${p.name}</strong> <span class="chip">${p.city}</span>
-                   <span class="chip">${p.phone}</span>
-                   <span class="chip">${p.saleMode.toUpperCase()}</span>
-                   <span class="chip ${p.status==="approved"?"good":(p.status==="rejected"?"bad":"")}">
-                   ${statusMap[p.status]||p.status}</span>`;
-  const img = p.image ? `<img src="${p.image}" alt="" style="max-height:140px;border-radius:10px;border:1px solid var(--border)"/>`:"";
-  const desc = `<p class="muted">${p.desc||""}</p>`;
-  const price = `<div class="row"><span data-i="inc"></span>:
-                 <button class="btn small" data-bid="${p.id}">+${p.step.toLocaleString()}</button>
-                 <span class="price">${p.price.toLocaleString()} د.ع</span></div>`;
-  const reason = p.reason? `<div class="muted">📝 ${p.reason}</div>`:"";
-  wrap.innerHTML = top.outerHTML + img + desc + (p.status==="approved"?price:"") + reason;
-
-  // bid button
-  wrap.querySelector("[data-bid]")?.addEventListener("click",()=>{
-    p.price += p.step; save();
-  });
-
-  // admin controls
-  if(adminView && (session.role==="admin" || session.role==="super")){
-    const tools = document.createElement("div"); tools.className="row"; tools.style.marginTop="6px";
-    const reasonInput = document.createElement("input"); reasonInput.placeholder=L[lang].reason_ph; reasonInput.value=p.reason||"";
-    reasonInput.style.flex="1";
-    const approve = document.createElement("button"); approve.className="btn pri small"; approve.textContent=L[lang].b_approve;
-    const reject = document.createElement("button"); reject.className="btn small"; reject.textContent=L[lang].b_reject;
-    approve.onclick=()=>{ p.status="approved"; p.reason=""; save(); };
-    reject.onclick =()=>{ p.status="rejected"; p.reason=reasonInput.value||L[lang].reason_ph; {
-  "name": "Mazad Bazar",
-  "short_name": "Mazad",
-  "start_url": "index.html",
-  "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#6200ea",
-  "icons": [
-    {
-      "src": "icon.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "icon.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
-  ]
-}
-    tools.append(reasonInput, approve, reject);
-    wrap.appendChild(tools);
-  }
-  return wrap;
+  $('#btn-save-admins').onclick = ()=>{
+    db.settings.admins = $('#set-admins').value.split(',').map(s=>s.trim()).filter(Boolean);
+    saveDB(); alert('Admins updated.');
+  };
 }
 
-function renderMarket(){
-  const list = document.getElementById("marketList");
-  list.innerHTML="";
-  DB.posts.filter(p=>p.status==="approved").forEach(p=>list.appendChild(postCard(p,false)));
+/* ===== Header bits that depend on settings ===== */
+function applySettings(){
+  $('#fee').textContent = db.settings.fee;
+  $('#wallet').textContent = db.settings.wallet;
+  $('#wallet2').textContent = db.settings.wallet;
 }
 
-function renderPending(){
-  const list = document.getElementById("pendingList");
-  list.innerHTML="";
-  DB.posts.filter(p=>p.status!=="approved").forEach(p=>list.appendChild(postCard(p,true)));
+/* ===== Render Root ===== */
+function render(){
+  // session UI
+  const logged = !!state.session;
+  $('#btn-login').classList.toggle('hide', logged);
+  $('#btn-logout').classList.toggle('hide', !logged);
+
+  applySettings();
+  tr();
+  renderList();
+  renderAdmin();
 }
+render();
 
-/* ========= Admin Tools (super-admin) ========= */
-function renderAdminTools(){
-  const box = document.getElementById("adminTools");
-  box.innerHTML="";
-  if(session.role==="viewer"){
-    box.innerHTML = `<p class="muted" data-i="admin_needlogin">${L[lang].admin_needlogin}</p>`;
-    return;
-  }
-  const adminsUI = document.createElement("div");
-  adminsUI.innerHTML = `<h4>Admins</h4>
-    <div class="row">
-      <input id="newAdmin" placeholder="username"/>
-      <button class="btn small" id="addAdmin">Add</button>
-      <button class="btn small" id="delAdmin">Remove</button>
-    </div>
-    <div class="row" style="margin-top:6px"><span class="chip">List:</span>
-      ${DB.admins.map(a=>`<span class="chip">${a}</span>`).join(" ")}
-    </div>
-    <hr style="border-color:var(--border)">
-    <h4>Wallet</h4>
-    <div class="row"><span class="chip">07827513551</span>
-      <span class="chip">IQD ${ (DB.wallet["07827513551"]||0).toLocaleString() }</span>
-      <button class="btn small" id="resetWallet">Reset (demo)</button>
-    </div>
-  `;
-  box.appendChild(adminsUI);
-
-  // only super admin can edit admins/wallet
-  if(session.role!=="super"){
-    box.querySelectorAll("button,input").forEach(el=>el.disabled=true);
-  }else{
-    document.getElementById("addAdmin").onclick=()=>{
-      const u=document.getElementById("newAdmin").value.trim();
-      if(u && !DB.admins.includes(u)){ DB.admins.push(u); save(); }
-    };
-    document.getElementById("delAdmin").onclick=()=>{
-      const u=document.getElementById("newAdmin").value.trim();
-      DB.admins = DB.admins.filter(x=>x!==u); save();
-    };
-    document.getElementById("resetWallet").onclick=()=>{
-      DB.wallet["07827513551"]=0; save();
-    };
-  }
+/* ===== Register SW (optional if file exists) ===== */
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('sw.js').catch(()=>{});
 }
-
-/* ========= Wallet footer ========= */
-function renderWalletInfo(){
-  document.getElementById("walletInfo").textContent =
-    "Wallet balance (demo): IQD " + ((DB.wallet["07827513551"]||0).toLocaleString());
-}
-
-/* ========= Fees hint per mode ========= */
-document.querySelector('select[name="saleMode"]').addEventListener("change", (e)=>{
-  const fee = (e.target.value==="auction") ? "" : L[lang].paymsg;
-  document.getElementById("feeInfo").textContent = fee;
-});
-
-/* ========= Render all ========= */
-function renderAll(){ applyI18n(); renderMarket(); renderPending(); renderAdminTools(); renderWalletInfo(); }
-renderAll();
-</script><link rel="manifest" href="manifest.webmanifest">
-
-<!-- Meta -->
-<meta name="theme-color" content="#ffffff">
-
-<!-- Icons -->
-<link rel="icon" href="icon.png" type="image/png">
-<link rel="apple-touch-icon" href="icon.png">
+</script>
 </body>
 </html>
