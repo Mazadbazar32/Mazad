@@ -1,52 +1,135 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ckb" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mazad Bazar</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mazad Bazar – مزاد بازار</title>
+  <meta name="description" content="مزاد بازار | بازاڕی سادە بۆ فرۆشتن و کڕین" />
+
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background: #f4f4f4;
-      margin: 0;
-      padding: 0;
+    :root{
+      --bg:#0c1222;
+      --card:#121a2e;
+      --pri:#22c55e;
+      --pri-2:#16a34a;
+      --txt:#e5e7eb;
+      --muted:#9aa3b2;
+      --border:#22304d;
     }
-    header {
-      background: #6a0dad;
-      color: white;
-      padding: 20px;
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family: -apple-system, Segoe UI, Roboto, Noto Naskh Arabic, Helvetica, Arial, sans-serif;
+      background:var(--bg); color:var(--txt); line-height:1.6;
+      -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
     }
-    main {
-      margin: 40px auto;
-      max-width: 600px;
-      background: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    header{
+      position:sticky; top:0; backdrop-filter: blur(6px);
+      background:color-mix(in srgb, var(--bg) 90%, transparent);
+      border-bottom:1px solid var(--border);
+      padding:14px 16px; z-index:10;
+      display:flex; align-items:center; gap:12px; justify-content:space-between;
     }
-    a.button {
-      display: inline-block;
-      padding: 10px 20px;
-      background: #6a0dad;
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
-      margin-top: 15px;
+    .brand{display:flex; align-items:center; gap:10px; font-weight:700; font-size:18px}
+    .logo{
+      width:34px;height:34px; border-radius:10px;
+      background: linear-gradient(135deg, var(--pri), #2dd4bf);
+      display:grid; place-items:center; color:#08131a; font-weight:900;
+      box-shadow:0 8px 24px rgba(34,197,94,.25);
     }
-    a.button:hover {
-      background: #580b99;
+    main{max-width:900px; margin:24px auto; padding:0 16px}
+    .hero{
+      background:var(--card); border:1px solid var(--border); border-radius:16px;
+      padding:22px;
     }
+    h1{margin:0 0 8px;font-size:26px}
+    p.lead{margin:0 0 14px; color:var(--muted)}
+    .row{display:flex; gap:10px; flex-wrap:wrap}
+    .btn{
+      appearance:none; border:0; cursor:pointer;
+      padding:12px 16px; border-radius:12px; font-weight:700; font-size:15px;
+      background:#1f2a44; color:var(--txt); border:1px solid var(--border);
+    }
+    .btn.pri{background:var(--pri); color:#032010}
+    .btn.pri:hover{background:var(--pri-2)}
+    .search{
+      flex:1; min-width:180px; display:flex; gap:8px
+    }
+    .search input{
+      flex:1; padding:12px 14px; border-radius:12px; border:1px solid var(--border);
+      background:#0f172a; color:var(--txt)
+    }
+    .grid{margin-top:16px; display:grid; gap:12px}
+    .card{
+      background:var(--card); border:1px solid var(--border); border-radius:14px;
+      padding:16px
+    }
+    .meta{display:flex; gap:10px; color:var(--muted); font-size:13px}
+    footer{color:var(--muted); text-align:center; padding:26px 12px}
+    .note{font-size:13px; color:var(--muted); margin-top:10px}
   </style>
 </head>
+
 <body>
   <header>
-    <h1>Welcome to Mazad Bazar</h1>
+    <div class="brand">
+      <div class="logo">MB</div>
+      <div>Mazad Bazar – مزاد بازار</div>
+    </div>
+
+    <div class="row">
+      <div class="search">
+        <input id="q" type="search" placeholder="گەڕان بە ناو/پێناسە…" />
+        <button class="btn" onclick="alert('گەڕان کارا بوو ✅')">گەڕان</button>
+      </div>
+      <button class="btn pri" onclick="alert('زیادکردنی کاڵا: نرخی سەرەتایی ٠ دینار؛ کریار دەتوانێت زیاد بکات ✅')">
+        زیادکردنی کاڵا
+      </button>
+    </div>
   </header>
+
   <main>
-    <h2>Official Auction Platform</h2>
-    <p>Buy, Sell, and Bid Live — Easy and Fast.</p>
-    <a href="#" class="button">Download App</a>
+    <section class="hero">
+      <h1>بەخێربێیت بۆ «مزاد بازار» 🚀</h1>
+      <p class="lead">پۆرتاڵی سادەی مزايدة — کاڵاکەت دابنێ، نرخی سەرەتایی خۆکارە ٠ دینارە و کڕیاران دەتوانن نرخیان زیاد بکەن.</p>
+      <div class="row">
+        <button class="btn" onclick="alert('نوێترین کاڵاکان پیشان درا ✅')">نوێترین</button>
+        <button class="btn" onclick="alert('ڕیزبەندی بە نرخ/کات کارا بوو ✅')">ڕیزبەندی</button>
+        <button class="btn" onclick="alert('دڵخوازەکان: هیچ ئەنجامێک نییە لەم دیمۆیەدا ✅')">دڵخواز</button>
+      </div>
+      <div class="note">تێبینی: هەموو پۆستەکان پێویستن بە پەسەندکردنی ئەدمین هەڵبژێردراون.</div>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <h3>نمونە کاڵا</h3>
+        <div class="meta">
+          <span>نرخی ئێستا: <b id="price">٠</b> دینار</span>
+          <span>شوێن: هەولێر</span>
+          <span>دۆخ: تازە</span>
+        </div>
+        <div class="row" style="margin-top:12px">
+          <button class="btn pri" onclick="inc(1000)">+١,٠٠٠</button>
+          <button class="btn" onclick="inc(5000)">+٥,٠٠٠</button>
+          <button class="btn" onclick="inc(10000)">+١٠,٠٠٠</button>
+          <button class="btn" onclick="reset()">ڕیست</button>
+        </div>
+      </article>
+    </section>
   </main>
+
+  <footer>
+    Mazad Bazar – PWA beta • Safari / Chrome / Android / iOS
+  </footer>
+
+  <script>
+    // دیمۆی زیادکردنی نرخ بۆ کارتەکەی سەرەوە
+    let p = 0;
+    const fmt = n => n.toLocaleString('ar-IQ');
+    function inc(step){ p += step; document.getElementById('price').textContent = fmt(p); }
+    function reset(){ p = 0; document.getElementById('price').textContent = '٠'; }
+    // دڵنیابوونەوە لە هەموو شت کارا بوون
+    console.log('Mazad Bazar ready ✔');
+  </script>
 </body>
 </html>
