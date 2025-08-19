@@ -357,7 +357,26 @@ function postCard(p, adminView=false){
     const approve = document.createElement("button"); approve.className="btn pri small"; approve.textContent=L[lang].b_approve;
     const reject = document.createElement("button"); reject.className="btn small"; reject.textContent=L[lang].b_reject;
     approve.onclick=()=>{ p.status="approved"; p.reason=""; save(); };
-    reject.onclick =()=>{ p.status="rejected"; p.reason=reasonInput.value||L[lang].reason_ph; save(); };
+    reject.onclick =()=>{ p.status="rejected"; p.reason=reasonInput.value||L[lang].reason_ph; {
+  "name": "Mazad Bazar",
+  "short_name": "Mazad",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#6200ea",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
     tools.append(reasonInput, approve, reject);
     wrap.appendChild(tools);
   }
